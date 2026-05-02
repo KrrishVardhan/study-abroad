@@ -1,0 +1,1234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>EuroPath — Study in Italy & Germany</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --navy: #0d1b2a;
+    --navy-mid: #1a2d42;
+    --gold: #c9a84c;
+    --gold-light: #e8c97a;
+    --cream: #f5f0e8;
+    --cream-dark: #ede6d6;
+    --white: #ffffff;
+    --italy: #009246;
+    --germany: #dd0000;
+    --text-dark: #0d1b2a;
+    --text-mid: #3d4f61;
+    --text-light: #7a8fa3;
+    --border: rgba(201,168,76,0.25);
+    --shadow: 0 20px 60px rgba(13,27,42,0.15);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5vw;
+    height: 68px;
+    background: rgba(13,27,42,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    transition: background 0.3s;
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem; font-weight: 700;
+    color: var(--white);
+    letter-spacing: 0.5px;
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--gold); }
+  .nav-links {
+    display: flex; gap: 2rem; list-style: none;
+  }
+  .nav-links a {
+    color: rgba(255,255,255,0.75);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold-light); }
+  .nav-cta {
+    background: var(--gold);
+    color: var(--navy) !important;
+    padding: 0.45rem 1.1rem;
+    border-radius: 4px;
+    font-weight: 600 !important;
+    font-size: 0.82rem !important;
+    letter-spacing: 0.4px;
+    transition: background 0.2s !important;
+  }
+  .nav-cta:hover { background: var(--gold-light) !important; color: var(--navy) !important; }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    background: var(--navy);
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: flex-start;
+    padding: 120px 5vw 80px;
+    position: relative; overflow: hidden;
+  }
+  .hero-map {
+    position: absolute; right: -5vw; top: 50%; transform: translateY(-50%);
+    width: 52vw; opacity: 0.06;
+    pointer-events: none;
+  }
+  .hero-flags {
+    display: flex; gap: 0.6rem; margin-bottom: 1.8rem;
+    animation: fadeUp 0.7s ease both;
+  }
+  .flag-tag {
+    display: flex; align-items: center; gap: 0.4rem;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 20px;
+    padding: 0.3rem 0.85rem;
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.75);
+    font-weight: 500;
+    letter-spacing: 0.3px;
+  }
+  .flag-dot-it { width: 8px; height: 8px; border-radius: 50%; background: var(--italy); }
+  .flag-dot-de { width: 8px; height: 8px; border-radius: 50%; background: #ffce00; }
+
+  .hero-headline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.8rem, 5.5vw, 5rem);
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.08;
+    max-width: 760px;
+    margin-bottom: 1.4rem;
+    animation: fadeUp 0.8s 0.1s ease both;
+  }
+  .hero-headline em {
+    font-style: italic;
+    color: var(--gold);
+  }
+  .hero-sub {
+    font-size: 1.05rem;
+    color: rgba(255,255,255,0.65);
+    max-width: 520px;
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+    animation: fadeUp 0.8s 0.2s ease both;
+  }
+  .hero-btns {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    animation: fadeUp 0.8s 0.3s ease both;
+  }
+  .btn-primary {
+    background: var(--gold);
+    color: var(--navy);
+    padding: 0.85rem 2rem;
+    border-radius: 5px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    letter-spacing: 0.3px;
+    transition: all 0.2s;
+    border: 2px solid var(--gold);
+  }
+  .btn-primary:hover { background: var(--gold-light); border-color: var(--gold-light); transform: translateY(-2px); }
+  .btn-outline {
+    background: transparent;
+    color: var(--white);
+    padding: 0.85rem 2rem;
+    border-radius: 5px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    text-decoration: none;
+    letter-spacing: 0.3px;
+    border: 2px solid rgba(255,255,255,0.3);
+    transition: all 0.2s;
+  }
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+
+  .hero-scroll {
+    position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+    color: rgba(255,255,255,0.35); font-size: 0.7rem; letter-spacing: 1px;
+    text-transform: uppercase;
+    animation: bounce 2s 1.5s infinite;
+  }
+  .hero-scroll svg { width: 18px; opacity: 0.5; }
+
+  /* ── STATS BAR ── */
+  #stats {
+    background: var(--gold);
+    padding: 1.2rem 5vw;
+    display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap;
+  }
+  .stat-item {
+    display: flex; align-items: center; gap: 0.6rem;
+    color: var(--navy);
+  }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem; font-weight: 700;
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.75rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.8px;
+    line-height: 1.3;
+    max-width: 90px;
+  }
+  .stat-div {
+    width: 1px; height: 36px;
+    background: rgba(13,27,42,0.2);
+  }
+
+  /* ── SECTIONS SHARED ── */
+  section { padding: 90px 5vw; }
+  .section-tag {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem; font-weight: 500;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+  .section-tag::before {
+    content: ''; display: block;
+    width: 24px; height: 1px; background: var(--gold);
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 700; line-height: 1.15;
+    color: var(--navy);
+    margin-bottom: 1rem;
+  }
+  .section-title em { font-style: italic; color: var(--gold); }
+  .section-sub {
+    font-size: 1rem; color: var(--text-mid);
+    line-height: 1.7; max-width: 560px;
+    font-weight: 300;
+  }
+
+  /* ── PROMISE ── */
+  #promise {
+    background: var(--cream);
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 5vw; align-items: center;
+  }
+  .promise-left .section-title { margin-bottom: 1.5rem; }
+  .promise-cards {
+    display: flex; flex-direction: column; gap: 1rem;
+  }
+  .promise-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.4rem 1.6rem;
+    display: flex; gap: 1.2rem; align-items: flex-start;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .promise-card:hover { transform: translateX(6px); box-shadow: var(--shadow); }
+  .promise-icon {
+    width: 44px; height: 44px; min-width: 44px;
+    background: var(--navy);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem;
+  }
+  .promise-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem; font-weight: 600;
+    color: var(--navy); margin-bottom: 0.3rem;
+  }
+  .promise-card p {
+    font-size: 0.85rem; color: var(--text-mid);
+    line-height: 1.6; font-weight: 300;
+  }
+
+  /* ── DESTINATIONS ── */
+  #destinations {
+    background: var(--navy);
+    padding: 90px 5vw;
+  }
+  #destinations .section-title { color: var(--white); }
+  #destinations .section-sub { color: rgba(255,255,255,0.55); }
+  .dest-grid {
+    display: grid; grid-template-columns: 1.3fr 1fr;
+    gap: 1.5rem; margin-top: 3.5rem;
+  }
+  .dest-card {
+    border-radius: 14px; overflow: hidden;
+    position: relative; cursor: pointer;
+    transition: transform 0.3s;
+    text-decoration: none;
+  }
+  .dest-card:hover { transform: translateY(-6px); }
+  .dest-card-inner {
+    background: var(--navy-mid);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 14px;
+    padding: 2.5rem;
+    height: 100%;
+    position: relative; overflow: hidden;
+  }
+  .dest-card.italy .dest-card-inner { border-top: 3px solid var(--italy); }
+  .dest-card.germany .dest-card-inner { border-top: 3px solid #ffce00; }
+  .dest-bg {
+    position: absolute; right: -20px; bottom: -20px;
+    font-size: 8rem; opacity: 0.07;
+    pointer-events: none; line-height: 1;
+  }
+  .dest-badge {
+    display: inline-block;
+    padding: 0.3rem 0.8rem;
+    border-radius: 4px;
+    font-size: 0.72rem; font-weight: 600;
+    letter-spacing: 1px; text-transform: uppercase;
+    margin-bottom: 1.2rem;
+  }
+  .italy .dest-badge { background: rgba(0,146,70,0.2); color: #4cca85; }
+  .germany .dest-badge { background: rgba(255,206,0,0.15); color: #ffce00; }
+  .dest-flag { font-size: 2.5rem; margin-bottom: 0.8rem; display: block; }
+  .dest-card h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem; font-weight: 700;
+    color: var(--white); margin-bottom: 0.5rem; line-height: 1.1;
+  }
+  .dest-card .dest-sub {
+    font-size: 0.85rem; color: rgba(255,255,255,0.5);
+    margin-bottom: 1.5rem; font-weight: 300;
+  }
+  .dest-pills {
+    display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.8rem;
+  }
+  .dest-pill {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 20px;
+    padding: 0.3rem 0.8rem;
+    font-size: 0.75rem; color: rgba(255,255,255,0.65);
+    font-weight: 500;
+  }
+  .dest-stats {
+    display: flex; gap: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+  .dest-stat .num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem; font-weight: 700; color: var(--white);
+  }
+  .dest-stat .lbl {
+    font-size: 0.72rem; color: rgba(255,255,255,0.4);
+    font-weight: 400; text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  .dest-arrow {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    color: var(--gold); font-size: 0.85rem; font-weight: 600;
+    margin-top: 1.2rem;
+    transition: gap 0.2s;
+  }
+  .dest-card:hover .dest-arrow { gap: 0.9rem; }
+
+  /* ── PROCESS ── */
+  #process { background: var(--cream-dark); }
+  .process-header { max-width: 540px; margin-bottom: 4rem; }
+  .steps-track {
+    display: grid; grid-template-columns: repeat(7, 1fr);
+    gap: 0; position: relative;
+  }
+  .steps-track::before {
+    content: '';
+    position: absolute; top: 28px; left: 6%; right: 6%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold) 0%, var(--gold-light) 100%);
+    z-index: 0;
+  }
+  .step {
+    display: flex; flex-direction: column;
+    align-items: center; text-align: center;
+    padding: 0 0.5rem;
+    position: relative; z-index: 1;
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.5s, transform 0.5s;
+  }
+  .step.visible { opacity: 1; transform: translateY(0); }
+  .step-num {
+    width: 56px; height: 56px;
+    background: var(--navy);
+    border: 3px solid var(--gold);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem; font-weight: 700;
+    color: var(--gold);
+    margin-bottom: 1.2rem;
+    position: relative; z-index: 2;
+  }
+  .step-icon { font-size: 1.1rem; }
+  .step h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.95rem; font-weight: 700;
+    color: var(--navy); margin-bottom: 0.3rem;
+    line-height: 1.2;
+  }
+  .step p {
+    font-size: 0.73rem; color: var(--text-light);
+    line-height: 1.5; font-weight: 300;
+  }
+
+  /* ── SERVICES ── */
+  #services { background: var(--white); }
+  .services-header {
+    display: flex; justify-content: space-between;
+    align-items: flex-end; margin-bottom: 3rem;
+    flex-wrap: wrap; gap: 1.5rem;
+  }
+  .services-note {
+    font-size: 0.85rem; color: var(--text-mid);
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 0.6rem 1rem;
+    font-style: italic;
+  }
+  .services-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 1.2rem;
+  }
+  .service-card {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.8rem 1.5rem;
+    transition: all 0.25s;
+    position: relative; overflow: hidden;
+    cursor: default;
+  }
+  .service-card::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 3px; background: var(--gold);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.3s;
+  }
+  .service-card:hover { box-shadow: var(--shadow); transform: translateY(-4px); background: var(--white); }
+  .service-card:hover::after { transform: scaleX(1); }
+  .service-emoji { font-size: 1.8rem; margin-bottom: 1rem; display: block; }
+  .service-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem; font-weight: 700;
+    color: var(--navy); margin-bottom: 0.5rem;
+  }
+  .service-card p {
+    font-size: 0.8rem; color: var(--text-mid);
+    line-height: 1.6; font-weight: 300;
+  }
+
+  /* ── COST ── */
+  #cost {
+    background: var(--navy);
+    padding: 90px 5vw;
+  }
+  #cost .section-title { color: var(--white); }
+  #cost .section-sub { color: rgba(255,255,255,0.55); max-width: 600px; }
+  .cost-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 2rem; margin-top: 3.5rem;
+  }
+  .cost-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 14px; padding: 2.2rem;
+    position: relative; overflow: hidden;
+  }
+  .cost-card.italy { border-top: 3px solid var(--italy); }
+  .cost-card.germany { border-top: 3px solid #ffce00; }
+  .cost-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem; font-weight: 700;
+    color: var(--white); margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 0.6rem;
+  }
+  .cost-rows { display: flex; flex-direction: column; gap: 0.7rem; }
+  .cost-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0.7rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .cost-row:last-child { border-bottom: none; }
+  .cost-label { font-size: 0.83rem; color: rgba(255,255,255,0.55); font-weight: 400; }
+  .cost-value { font-size: 0.9rem; font-weight: 600; color: var(--white); }
+  .cost-value.green { color: #4cca85; }
+  .cost-value.gold { color: var(--gold-light); }
+  .cost-total {
+    margin-top: 1.2rem;
+    padding: 1rem 1.2rem;
+    background: rgba(201,168,76,0.12);
+    border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 8px;
+    display: flex; justify-content: space-between;
+    align-items: center;
+  }
+  .cost-total .label { font-size: 0.8rem; color: var(--gold-light); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+  .cost-total .value { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 700; color: var(--gold); }
+  .cost-compare-note {
+    margin-top: 2.5rem;
+    background: rgba(201,168,76,0.1);
+    border-left: 3px solid var(--gold);
+    border-radius: 0 8px 8px 0;
+    padding: 1.2rem 1.5rem;
+    font-size: 0.88rem; color: rgba(255,255,255,0.7);
+    line-height: 1.7;
+  }
+  .cost-compare-note strong { color: var(--gold-light); }
+
+  /* ── FAQ ── */
+  #faq { background: var(--cream); }
+  .faq-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 2rem; margin-top: 3.5rem; align-items: start;
+  }
+  .faq-left .section-sub { margin-bottom: 2rem; }
+  .faq-cta-box {
+    background: var(--navy);
+    border-radius: 14px; padding: 2rem;
+    text-align: center; margin-top: 1.5rem;
+  }
+  .faq-cta-box h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem; font-weight: 700;
+    color: var(--white); margin-bottom: 0.6rem;
+  }
+  .faq-cta-box p {
+    font-size: 0.83rem; color: rgba(255,255,255,0.5);
+    margin-bottom: 1.3rem; line-height: 1.6;
+  }
+  .faqs { display: flex; flex-direction: column; gap: 0.6rem; }
+  .faq-item {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px; overflow: hidden;
+  }
+  .faq-q {
+    padding: 1.1rem 1.3rem;
+    display: flex; justify-content: space-between; align-items: center;
+    cursor: pointer; gap: 1rem;
+    transition: background 0.2s;
+  }
+  .faq-q:hover { background: var(--cream); }
+  .faq-q span {
+    font-size: 0.88rem; font-weight: 600;
+    color: var(--navy); line-height: 1.4;
+  }
+  .faq-toggle {
+    width: 24px; height: 24px; min-width: 24px;
+    background: var(--gold);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.9rem; color: var(--navy);
+    font-weight: 700; transition: transform 0.3s;
+  }
+  .faq-item.open .faq-toggle { transform: rotate(45deg); }
+  .faq-a {
+    display: none;
+    padding: 0 1.3rem 1.1rem;
+    font-size: 0.83rem; color: var(--text-mid);
+    line-height: 1.7; font-weight: 300;
+    border-top: 1px solid var(--border);
+    padding-top: 0.9rem;
+  }
+  .faq-item.open .faq-a { display: block; }
+
+  /* ── CTA SECTION ── */
+  #cta-section {
+    background: linear-gradient(135deg, var(--navy) 0%, #1a3a5c 50%, var(--navy) 100%);
+    padding: 100px 5vw;
+    text-align: center;
+    position: relative; overflow: hidden;
+  }
+  #cta-section::before {
+    content: '✈';
+    position: absolute; font-size: 20rem;
+    opacity: 0.02; top: -4rem; right: 5vw;
+    pointer-events: none;
+  }
+  .cta-inner { max-width: 620px; margin: 0 auto; }
+  .cta-inner .section-tag { justify-content: center; }
+  .cta-inner .section-title { color: var(--white); text-align: center; }
+  .cta-inner .section-sub { color: rgba(255,255,255,0.55); text-align: center; margin: 1rem auto 2.5rem; }
+  .cta-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .btn-whatsapp {
+    background: #25D366; color: var(--white);
+    padding: 0.85rem 2rem; border-radius: 5px;
+    font-weight: 600; font-size: 0.9rem;
+    text-decoration: none; letter-spacing: 0.3px;
+    display: flex; align-items: center; gap: 0.5rem;
+    transition: all 0.2s;
+  }
+  .btn-whatsapp:hover { background: #20bc5a; transform: translateY(-2px); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #080f18;
+    padding: 3rem 5vw 2rem;
+    border-top: 1px solid rgba(201,168,76,0.2);
+  }
+  .footer-top {
+    display: flex; justify-content: space-between;
+    align-items: flex-start; flex-wrap: wrap; gap: 2rem;
+    margin-bottom: 2rem; padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .footer-brand .nav-logo { display: inline-block; margin-bottom: 0.7rem; }
+  .footer-brand p {
+    font-size: 0.8rem; color: rgba(255,255,255,0.35);
+    max-width: 220px; line-height: 1.6;
+  }
+  .footer-links h4 {
+    font-size: 0.75rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 1px;
+    color: var(--gold); margin-bottom: 0.9rem;
+  }
+  .footer-links ul { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+  .footer-links a {
+    font-size: 0.82rem; color: rgba(255,255,255,0.4);
+    text-decoration: none; transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--gold-light); }
+  .footer-bottom {
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 1rem;
+  }
+  .footer-bottom p {
+    font-size: 0.75rem; color: rgba(255,255,255,0.2);
+  }
+  .footer-location {
+    font-size: 0.75rem; color: rgba(255,255,255,0.25);
+    display: flex; align-items: center; gap: 0.4rem;
+  }
+
+  /* ── FLOATING WA ── */
+  .wa-float {
+    position: fixed; bottom: 2rem; right: 2rem; z-index: 99;
+    width: 56px; height: 56px;
+    background: #25D366; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    text-decoration: none; box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+    transition: transform 0.2s, box-shadow 0.2s;
+    animation: pulse-wa 2s infinite;
+  }
+  .wa-float:hover { transform: scale(1.1); box-shadow: 0 8px 30px rgba(37,211,102,0.5); }
+  .wa-float svg { width: 28px; height: 28px; fill: white; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(6px); }
+  }
+  @keyframes pulse-wa {
+    0%, 100% { box-shadow: 0 4px 20px rgba(37,211,102,0.4); }
+    50% { box-shadow: 0 4px 30px rgba(37,211,102,0.7); }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 1024px) {
+    .services-grid { grid-template-columns: repeat(2, 1fr); }
+    .steps-track { grid-template-columns: repeat(4, 1fr); row-gap: 2rem; }
+    .steps-track::before { display: none; }
+  }
+  @media (max-width: 768px) {
+    nav { padding: 0 4vw; }
+    .nav-links { display: none; }
+    #promise, .dest-grid, .cost-grid, .faq-grid { grid-template-columns: 1fr; }
+    .dest-grid { gap: 1rem; }
+    section { padding: 60px 5vw; }
+    .steps-track { grid-template-columns: repeat(2, 1fr); }
+    .services-grid { grid-template-columns: repeat(2, 1fr); }
+    #stats { gap: 1.5rem; }
+    .stat-div { display: none; }
+    .footer-top { flex-direction: column; }
+  }
+  @media (max-width: 480px) {
+    .services-grid { grid-template-columns: 1fr; }
+    .steps-track { grid-template-columns: 1fr; }
+    .hero-btns { flex-direction: column; }
+    .btn-primary, .btn-outline { text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Euro<span>Path</span></a>
+  <ul class="nav-links">
+    <li><a href="#destinations">Destinations</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#cost">Costs</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#cta-section" class="nav-cta">Free Counselling</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <svg class="hero-map" viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M400 50 L750 200 L700 400 L500 500 L300 480 L100 350 L150 150 Z" stroke="white" stroke-width="1" fill="white" opacity="0.5"/>
+    <circle cx="480" cy="280" r="8" fill="white"/>
+    <circle cx="380" cy="200" r="8" fill="white"/>
+    <line x1="380" y1="200" x2="480" y2="280" stroke="white" stroke-width="1" stroke-dasharray="4,4"/>
+  </svg>
+
+  <div class="hero-flags">
+    <div class="flag-tag"><span class="flag-dot-it"></span>🇮🇹 Italy — Flagship</div>
+    <div class="flag-tag"><span class="flag-dot-de"></span>🇩🇪 Germany — Engineering</div>
+  </div>
+
+  <h1 class="hero-headline">
+    World-class European<br/>education at <em>near-zero cost</em>
+  </h1>
+
+  <p class="hero-sub">
+    Study at top-ranked public universities in Italy & Germany. Tuition fees as low as ₹0. End-to-end guidance from Jodhpur — IELTS coaching to visa filing.
+  </p>
+
+  <div class="hero-btns">
+    <a href="#destinations" class="btn-primary">Explore Destinations</a>
+    <a href="#cta-section" class="btn-outline">Book Free Counselling</a>
+  </div>
+
+  <div class="hero-scroll">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+    scroll
+  </div>
+</section>
+
+<!-- STATS -->
+<div id="stats">
+  <div class="stat-item">
+    <div class="stat-num">2</div>
+    <div class="stat-label">Expert Countries</div>
+  </div>
+  <div class="stat-div"></div>
+  <div class="stat-item">
+    <div class="stat-num">50+</div>
+    <div class="stat-label">Top Universities</div>
+  </div>
+  <div class="stat-div"></div>
+  <div class="stat-item">
+    <div class="stat-num">₹0</div>
+    <div class="stat-label">Tuition at Public Uni (Italy)</div>
+  </div>
+  <div class="stat-div"></div>
+  <div class="stat-item">
+    <div class="stat-num">8</div>
+    <div class="stat-label">Services Offered</div>
+  </div>
+  <div class="stat-div"></div>
+  <div class="stat-item">
+    <div class="stat-num">100%</div>
+    <div class="stat-label">Student-First Guidance</div>
+  </div>
+</div>
+
+<!-- PROMISE -->
+<section id="promise">
+  <div class="promise-left">
+    <div class="section-tag">Why Choose Us</div>
+    <h2 class="section-title">We recommend what<br/><em>we'd tell our own family</em></h2>
+    <p class="section-sub">
+      Most consultancies push expensive countries because universities pay them commissions. We don't. Our advice is built entirely around your budget, your goals, and your future — not ours.
+    </p>
+  </div>
+  <div class="promise-cards">
+    <div class="promise-card">
+      <div class="promise-icon">🎯</div>
+      <div>
+        <h3>Italy & Germany Only — Deep Expertise</h3>
+        <p>We don't scatter across 20 countries. We know Italy and Germany inside out — every intake, every scholarship, every document quirk.</p>
+      </div>
+    </div>
+    <div class="promise-card">
+      <div class="promise-icon">🏛️</div>
+      <div>
+        <h3>Public Universities Only</h3>
+        <p>No private colleges. No unknown institutions. Only government-backed, globally-ranked universities with real academic credibility.</p>
+      </div>
+    </div>
+    <div class="promise-card">
+      <div class="promise-icon">💰</div>
+      <div>
+        <h3>Full Cost Transparency</h3>
+        <p>We show you every number upfront — tuition, living, scholarship possibilities. No hidden surprises after you've committed.</p>
+      </div>
+    </div>
+    <div class="promise-card">
+      <div class="promise-icon">🤝</div>
+      <div>
+        <h3>End-to-End Personal Guidance</h3>
+        <p>From your first IELTS class to your boarding pass — one advisor, complete support. Not a call centre, not a handoff.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DESTINATIONS -->
+<section id="destinations">
+  <div class="section-tag">Study Destinations</div>
+  <h2 class="section-title" style="color:var(--white)">Two countries.<br/><em>Unbeatable value.</em></h2>
+  <p class="section-sub">Carefully chosen for their world rankings, near-zero costs, and exceptional student outcomes for Indian graduates.</p>
+
+  <div class="dest-grid">
+    <!-- ITALY CARD -->
+    <a class="dest-card italy" href="#cta-section">
+      <div class="dest-card-inner">
+        <div class="dest-bg">🇮🇹</div>
+        <div class="dest-badge">🌟 Flagship Destination</div>
+        <span class="dest-flag">🇮🇹</span>
+        <h2>Study in Italy</h2>
+        <p class="dest-sub">Public universities · English-taught programs · DSU Scholarship</p>
+        <div class="dest-pills">
+          <span class="dest-pill">₹0–₹1.5L tuition/year</span>
+          <span class="dest-pill">Engineering</span>
+          <span class="dest-pill">Architecture</span>
+          <span class="dest-pill">Design</span>
+          <span class="dest-pill">Sciences</span>
+          <span class="dest-pill">Business</span>
+          <span class="dest-pill">UG & PG</span>
+        </div>
+        <div class="dest-stats">
+          <div class="dest-stat">
+            <div class="num">20+</div>
+            <div class="lbl">Top Universities</div>
+          </div>
+          <div class="dest-stat">
+            <div class="num">100+</div>
+            <div class="lbl">English Programs</div>
+          </div>
+          <div class="dest-stat">
+            <div class="num">DSU</div>
+            <div class="lbl">Scholarship Available</div>
+          </div>
+        </div>
+        <div class="dest-arrow">Explore Italy →</div>
+      </div>
+    </a>
+
+    <!-- GERMANY CARD -->
+    <a class="dest-card germany" href="#cta-section">
+      <div class="dest-card-inner">
+        <div class="dest-bg">🇩🇪</div>
+        <div class="dest-badge">⚙️ Engineering Powerhouse</div>
+        <span class="dest-flag">🇩🇪</span>
+        <h2>Study in Germany</h2>
+        <p class="dest-sub">TU9 Alliance · €0 Tuition · 18-month Post-study Work Visa</p>
+        <div class="dest-pills">
+          <span class="dest-pill">€0 tuition</span>
+          <span class="dest-pill">Mechanical</span>
+          <span class="dest-pill">Civil</span>
+          <span class="dest-pill">Electrical</span>
+          <span class="dest-pill">Computer Science</span>
+          <span class="dest-pill">UG & PG</span>
+        </div>
+        <div class="dest-stats">
+          <div class="dest-stat">
+            <div class="num">TU9</div>
+            <div class="lbl">Elite Alliance</div>
+          </div>
+          <div class="dest-stat">
+            <div class="num">DAAD</div>
+            <div class="lbl">Scholarship</div>
+          </div>
+          <div class="dest-stat">
+            <div class="num">18mo</div>
+            <div class="lbl">Job Search Visa</div>
+          </div>
+        </div>
+        <div class="dest-arrow">Explore Germany →</div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="process-header">
+    <div class="section-tag">How It Works</div>
+    <h2 class="section-title">From Jodhpur<br/>to <em>Europe in 7 Steps</em></h2>
+    <p class="section-sub">A clear, structured journey — so you and your family always know exactly where you stand.</p>
+  </div>
+
+  <div class="steps-track" id="stepsTrack">
+    <div class="step">
+      <div class="step-num"><span class="step-icon">📋</span></div>
+      <h4>Profile Evaluation</h4>
+      <p>Free assessment of your academic background & goals</p>
+    </div>
+    <div class="step">
+      <div class="step-num"><span class="step-icon">📚</span></div>
+      <h4>IELTS Preparation</h4>
+      <p>Targeted coaching to hit your required band score</p>
+    </div>
+    <div class="step">
+      <div class="step-num"><span class="step-icon">🎯</span></div>
+      <h4>University Shortlisting</h4>
+      <p>Best-fit universities based on profile & career goals</p>
+    </div>
+    <div class="step">
+      <div class="step-num"><span class="step-icon">📝</span></div>
+      <h4>Application & SOP</h4>
+      <p>Complete filing + custom Statement of Purpose</p>
+    </div>
+    <div class="step">
+      <div class="step-num"><span class="step-icon">📩</span></div>
+      <h4>Offer Letter</h4>
+      <p>University acceptance & enrollment confirmation</p>
+    </div>
+    <div class="step">
+      <div class="step-num"><span class="step-icon">🛂</span></div>
+      <h4>Visa Filing</h4>
+      <p>Student visa application, documents & interview prep</p>
+    </div>
+    <div class="step">
+      <div class="step-num"><span class="step-icon">✈️</span></div>
+      <h4>Departure</h4>
+      <p>Pre-departure briefing, accommodation & travel support</p>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="services-header">
+    <div>
+      <div class="section-tag">Our Services</div>
+      <h2 class="section-title">Everything you need,<br/><em>nothing you don't</em></h2>
+    </div>
+    <div class="services-note">Take the full package or individual services — your choice</div>
+  </div>
+
+  <div class="services-grid">
+    <div class="service-card">
+      <span class="service-emoji">🎧</span>
+      <h3>IELTS Coaching</h3>
+      <p>Online & offline batches, mock tests, and strategy sessions tailored to hit Band 6.0–7.5 for European university requirements.</p>
+    </div>
+    <div class="service-card">
+      <span class="service-emoji">🏛️</span>
+      <h3>University & Course Selection</h3>
+      <p>Profile-based shortlisting of universities and programs. No commission bias — only what fits your goals and budget.</p>
+    </div>
+    <div class="service-card">
+      <span class="service-emoji">📋</span>
+      <h3>Application Assistance</h3>
+      <p>End-to-end application filing — forms, deadlines, document submission and follow-up tracking for every university.</p>
+    </div>
+    <div class="service-card">
+      <span class="service-emoji">✍️</span>
+      <h3>SOP Writing</h3>
+      <p>Custom Statement of Purpose written around your unique story — not a generic template. A key differentiator for admissions.</p>
+    </div>
+    <div class="service-card">
+      <span class="service-emoji">📁</span>
+      <h3>Documentation Support</h3>
+      <p>Complete checklist, attestation guidance, and translation support. Never miss a document or deadline.</p>
+    </div>
+    <div class="service-card">
+      <span class="service-emoji">🛂</span>
+      <h3>Visa Processing</h3>
+      <p>Italy Type-D and Germany student visa guidance — step-by-step support from application to appointment day.</p>
+    </div>
+    <div class="service-card">
+      <span class="service-emoji">🎓</span>
+      <h3>Pre-Enrollment Support</h3>
+      <p>Post-admission enrollment formalities, accommodation guidance, blocked account assistance, and travel checklist.</p>
+    </div>
+    <div class="service-card">
+      <span class="service-emoji">🏆</span>
+      <h3>Scholarship Guidance</h3>
+      <p>DSU (Italy) and DAAD (Germany) eligibility check, application strategy, and complete filing support.</p>
+    </div>
+  </div>
+</section>
+
+<!-- COST -->
+<section id="cost">
+  <div class="section-tag">Real Numbers</div>
+  <h2 class="section-title" style="color:var(--white)">The honest cost<br/><em>breakdown</em></h2>
+  <p class="section-sub">Most consultancies avoid this conversation. We lead with it — because transparency is our entire point.</p>
+
+  <div class="cost-grid">
+    <div class="cost-card italy">
+      <h3>🇮🇹 Italy — Monthly Budget</h3>
+      <div class="cost-rows">
+        <div class="cost-row">
+          <span class="cost-label">Tuition (annual)</span>
+          <span class="cost-value green">₹0 – ₹1.5L/year</span>
+        </div>
+        <div class="cost-row">
+          <span class="cost-label">Rent (shared accommodation)</span>
+          <span class="cost-value">₹12,000 – ₹18,000</span>
+        </div>
+        <div class="cost-row">
+          <span class="cost-label">Food & groceries</span>
+          <span class="cost-value">₹6,000 – ₹9,000</span>
+        </div>
+        <div class="cost-row">
+          <span class="cost-label">Transport</span>
+          <span class="cost-value">₹2,000 – ₹3,000</span>
+        </div>
+        <div class="cost-row">
+          <span class="cost-label">Miscellaneous</span>
+          <span class="cost-value">₹3,000 – ₹5,000</span>
+        </div>
+        <div class="cost-row">
+          <span class="cost-label">DSU Scholarship (if eligible)</span>
+          <span class="cost-value green">Tuition waived + ₹15–20K stipend</span>
+        </div>
+      </div>
+      <div class="cost-total">
+        <span class="label">Total Monthly</span>
+        <span class="value">₹23K – ₹35K</span>
+      </div>
+    </div>
+
+    <div class="cost-card germany">
+      <h3>🇩🇪 Germany — Monthly Budget</h3>
+      <div class="cost-rows">
+        <div class="cost-row">
+          <span class="cost-label">Tuition</span>
+          <span class="cost-value green">€0 (Public Universities)</span>
+        </div>
+        <div class="cost-row">
+          <span class="cost-label">Semester fee</span>
+          <span class="cost-value">₹12,000 – ₹28,000/semester</span>
+        </div>
+        <div class="cost-row">
+          <span class="cost-label">Rent (Munich)</span>
+          <span class="cost-value">₹18,000 – ₹25,000</span>
+        </div>
+        <div class="cost-row">
+          <span class="cost-label">Rent (smaller cities)</span>
+          <span class="cost-value green">₹10,000 – ₹15,000</span>
+        </div>
+        <div class="cost-row">
+          <span class="cost-label">Food + Miscellaneous</span>
+          <span class="cost-value">₹8,000 – ₹12,000</span>
+        </div>
+        <div class="cost-row">
+          <span class="cost-label">Blocked Account (one-time)</span>
+          <span class="cost-value gold">₹9–10L (your own money, refundable)</span>
+        </div>
+      </div>
+      <div class="cost-total">
+        <span class="label">Total Monthly</span>
+        <span class="value">₹28K – ₹45K</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="cost-compare-note">
+    💡 <strong>The comparison that changes everything:</strong> A private engineering college in India costs ₹40–₹80 lakhs over 4 years, with a degree far less recognized globally. A TU9 German or Politecnico Italian engineering degree — from a world top-100 university — costs a fraction of that. <strong>This is why we only recommend Italy and Germany.</strong>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="faq-grid">
+    <div class="faq-left">
+      <div class="section-tag">Common Questions</div>
+      <h2 class="section-title">Real answers to<br/><em>real doubts</em></h2>
+      <p class="section-sub">We hear these questions every day in Jodhpur. Here's the honest truth — no sales spin.</p>
+      <div class="faq-cta-box">
+        <h3>Still have questions?</h3>
+        <p>Book a free 30-minute call. We'll answer everything specific to your profile and situation.</p>
+        <a href="#cta-section" class="btn-primary" style="display:inline-block;">Book Free Call</a>
+      </div>
+    </div>
+
+    <div class="faqs">
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>Is education really free in Italy and Germany?</span>
+          <div class="faq-toggle">+</div>
+        </div>
+        <div class="faq-a">Yes — for public universities. In Germany, tuition is €0; you pay only a small semester fee (≈₹12,000–28,000). In Italy, tuition is income-based and can be as low as ₹0 — the DSU scholarship system can even give you a monthly stipend on top of the fee waiver.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>Do I need to know Italian or German to study there?</span>
+          <div class="faq-toggle">+</div>
+        </div>
+        <div class="faq-a">No! Both Italy and Germany offer hundreds of programs completely in English — especially at the master's level. Some Italian bachelor's programs are also in English. For German-taught programs, you'd need German (B2/C1), but English-medium options are widely available, especially in engineering.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>What IELTS band score do I need?</span>
+          <div class="faq-toggle">+</div>
+        </div>
+        <div class="faq-a">Most Italian and German universities require IELTS 6.0–6.5 for English-taught programs. Some programs may accept 5.5 or 7.0 depending on the course. We help you identify the exact requirement for your target university during counselling.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>What is the blocked account for Germany?</span>
+          <div class="faq-toggle">+</div>
+        </div>
+        <div class="faq-a">Germany requires you to deposit approximately ₹9–10 lakhs into a German blocked bank account before your visa is issued. This is NOT a fee — it is your own money, released to you monthly (≈₹75K/month) for living expenses in Germany. You get every rupee back.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>Can I work part-time while studying in Europe?</span>
+          <div class="faq-toggle">+</div>
+        </div>
+        <div class="faq-a">Yes. In Italy you can work up to 20 hours/week legally, typically earning ₹700–₹900/hour. Germany also allows 20 hours/week, often more during holidays. Many students cover a significant portion of their living costs through part-time work.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>How much bank balance do my parents need to show?</span>
+          <div class="faq-toggle">+</div>
+        </div>
+        <div class="faq-a">Requirements vary by country and visa type. For Italy, a bank statement showing sufficient living funds is required. For Germany, the blocked account (₹9–10L) effectively serves as the financial proof. We guide you through the exact requirements for your specific case during counselling.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>When should I start the application process?</span>
+          <div class="faq-toggle">+</div>
+        </div>
+        <div class="faq-a">Ideally 12–18 months before your intended start date. For September intake, start applying October–February. For January intake, apply March–June. IELTS preparation alone typically takes 3–6 months. The earlier you start, the more options you have.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>What happens after I graduate — can I stay and work?</span>
+          <div class="faq-toggle">+</div>
+        </div>
+        <div class="faq-a">Absolutely. Germany offers an 18-month job search visa post-graduation. Italy offers a 12-month stay-back for job hunting. Both countries have strong job markets — especially Germany for engineers — and pathways to long-term EU residency.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA SECTION -->
+<section id="cta-section">
+  <div class="cta-inner">
+    <div class="section-tag">Get Started</div>
+    <h2 class="section-title">Your European university<br/><em>journey starts here</em></h2>
+    <p class="section-sub">Book a free 30-minute counselling session. We'll assess your profile, suggest the right destination, and give you a clear roadmap — no commitment required.</p>
+    <div class="cta-btns">
+      <a href="https://wa.me/91XXXXXXXXXX" class="btn-whatsapp" target="_blank">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Chat on WhatsApp
+      </a>
+      <a href="mailto:hello@europath.in" class="btn-primary">Send Us an Email</a>
+      <a href="tel:+91XXXXXXXXXX" class="btn-outline">Call Us Directly</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="#" class="nav-logo">Euro<span>Path</span></a>
+      <p>Study abroad consultancy specializing in Italy & Germany. Based in Jodhpur, Rajasthan.</p>
+    </div>
+    <div class="footer-links">
+      <h4>Destinations</h4>
+      <ul>
+        <li><a href="#destinations">🇮🇹 Study in Italy</a></li>
+        <li><a href="#destinations">🇩🇪 Study in Germany</a></li>
+      </ul>
+    </div>
+    <div class="footer-links">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#services">IELTS Coaching</a></li>
+        <li><a href="#services">University Selection</a></li>
+        <li><a href="#services">SOP Writing</a></li>
+        <li><a href="#services">Visa Processing</a></li>
+        <li><a href="#services">Scholarship Guidance</a></li>
+      </ul>
+    </div>
+    <div class="footer-links">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="#process">Our Process</a></li>
+        <li><a href="#cost">Cost Breakdown</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#cta-section">Free Counselling</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 EuroPath Study Abroad Consultancy. All rights reserved.</p>
+    <div class="footer-location">📍 Jodhpur, Rajasthan, India</div>
+  </div>
+</footer>
+
+<!-- FLOATING WHATSAPP -->
+<a href="https://wa.me/91XXXXXXXXXX" class="wa-float" target="_blank" title="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+
+<script>
+  // FAQ toggle
+  function toggleFaq(el) {
+    const item = el.parentElement;
+    item.classList.toggle('open');
+  }
+
+  // Step animations on scroll
+  const steps = document.querySelectorAll('.step');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const allSteps = document.querySelectorAll('.step');
+        allSteps.forEach((step, i) => {
+          setTimeout(() => step.classList.add('visible'), i * 120);
+        });
+        observer.disconnect();
+      }
+    });
+  }, { threshold: 0.2 });
+  const track = document.getElementById('stepsTrack');
+  if (track) observer.observe(track);
+
+  // Smooth nav highlight
+  const navLinks = document.querySelectorAll('.nav-links a:not(.nav-cta)');
+  window.addEventListener('scroll', () => {
+    const pos = window.scrollY;
+    document.querySelectorAll('section[id], div[id]').forEach(section => {
+      if (pos >= section.offsetTop - 100) {
+        navLinks.forEach(l => l.style.color = '');
+        const link = document.querySelector(`.nav-links a[href="#${section.id}"]`);
+        if (link) link.style.color = 'var(--gold-light)';
+      }
+    });
+  });
+</script>
+</body>
+</html>
