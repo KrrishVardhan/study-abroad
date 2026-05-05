@@ -1,6 +1,8 @@
 import { Button } from "@/components/ui/button"
 import { BadgeDollarSign, Sparkles, Cpu, Target, Building2, Handshake, MessageCircle, Mail } from "lucide-react"
 
+import { FlipWords } from "./components/ui/flip-words";
+import { NoiseBackground } from "@/components/ui/noise-background";
 import {
   Card,
   CardContent,
@@ -18,6 +20,7 @@ import { Badge } from "./components/ui/badge"
 import { Separator } from "./components/ui/separator"
 
 export function App() {
+  const words = ["Germany", "Italy"];
   return (
     <main className="bg-background text-foreground">
       {/* NAVBAR */}
@@ -51,12 +54,10 @@ export function App() {
             <Cpu></Cpu> Germany — Engineering
           </Badge>
         </div>
-
         <h1 className="max-w-5xl text-5xl font-semibold leading-tight tracking-tight md:text-7xl">
-          World-class European education at{" "}
-          <span className="text-chart-1">
-            near-zero cost
-          </span>
+          Your future in <FlipWords words={words} className="text-chart-1 italic"/>
+          <br/>
+          starts here
         </h1>
 
         <p className="mt-8 max-w-2xl text-lg leading-8 text-muted-foreground">
@@ -66,16 +67,25 @@ export function App() {
         </p>
 
         <div className="mt-10 flex flex-wrap gap-4">
-          <Button className="">
-            Explore destinations
-          </Button>
-
-          <Button
-            variant="outline"
-            className=""
+          <NoiseBackground
+            containerClassName="w-fit p-2 rounded-full"
+            gradientColors={[
+              "rgb(145, 197, 255)",
+            ]}
           >
-            Book free counselling
-          </Button>
+            <button className="h-full w-full cursor-pointer rounded-full bg-linear-to-r from-neutral-100 via-neutral-100 to-white px-4 py-2 transition-all duration-100 active:scale-98 dark:from-background dark:via-secondary dark:to-muted dark:text-white">
+              Explore Destinations
+            </button>
+          </NoiseBackground>
+          <NoiseBackground
+            containerClassName="w-fit p-2 rounded-full"
+            gradientColors={[
+              "rgb(145, 197, 255)",
+            ]}>
+            <button className="h-full w-full cursor-pointer rounded-full bg-linear-to-r from-neutral-100 via-neutral-100 to-white px-4 py-2 transition-all duration-100 active:scale-98 dark:from-background dark:via-secondary dark:to-muted dark:text-white">
+              Book free counselling
+            </button>
+          </NoiseBackground>
         </div>
       </section>
 
